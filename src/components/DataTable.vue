@@ -6,7 +6,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="row in filtered" v-bind:class = "{ 'selected': clicked }" v-on:click="toggle(clicked)">
+            <tr v-for="row in filtered" :class = "{ 'selected': clicked }" @click="toggle(clicked)">
             <td v-for="col in columns">{{row[col]}}</td>
             </tr>
         </tbody>     
@@ -19,13 +19,13 @@ export default {
         rows: Array,
         filter: String,
     },
-    data: function(){
+    data(){
         return {
             clicked: false
         }
     },
     computed: {
-        columns: function () {
+        columns() {
           if (this.rows.length == 0) {
             return [];
           }
@@ -35,7 +35,7 @@ export default {
             }
         );
         },
-        filtered: function (filter) {
+        filtered(filter) {
             var filter = this.filter && this.filter.toLowerCase();
           var data = this.rows;
           if (filter) {
@@ -51,9 +51,8 @@ export default {
         }
     },
     methods: {
-        toggle: function (clicked) {
+        toggle(clicked) {
                 clicked = !clicked
-                console.log(clicked)
             }
     }
 }
